@@ -24,8 +24,14 @@ GEM
       amq-protocol (>= 0.7.0.alpha4)
       eventmachine
     amq-protocol (0.7.0.alpha4)
+    daemon_controller (0.2.6)
     eventmachine (0.12.10)
-    kgio (2.4.1)
+    fastthread (1.0.7)
+    passenger (3.0.7)
+      daemon_controller (>= 0.2.5)
+      fastthread (>= 1.0.1)
+      rack
+      rake (>= 0.8.1)
     pg (0.11.0)
     rack (1.1.2)
     rails (2.3.10)
@@ -36,16 +42,13 @@ GEM
       activesupport (= 2.3.10)
       rake (>= 0.8.3)
     rake (0.9.0)
-    unicorn (3.6.2)
-      kgio (~> 2.3)
-      rack
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   amqp (~> 0.8.0.rc12)!
+  passenger (= 3.0.7)
   pg
   rack (~> 1.1.0)
   rails (= 2.3.10)
-  unicorn
