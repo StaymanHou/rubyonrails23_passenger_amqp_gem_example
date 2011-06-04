@@ -28,4 +28,4 @@ that's why `PhusionPassenger.on_event(:starting_worker_process)` is used. See `c
 
 Apache Public License 2.0.
 
-See LICESE file in the repository root.
+See LICENSE file in the repository root.
