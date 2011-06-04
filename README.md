@@ -1,6 +1,6 @@
-# An example Ruby on Rails 2.3 application that uses Ruby AMQP gem with Unicorn #
+# An example Ruby on Rails 2.3 application that uses Ruby AMQP gem with Passenger #
 
-This app demonstrates how you can integrate [Ruby amqp gem](http://github.com/ruby-amqp/amqp) into a Ruby on Rails application that runs on [Unicorn](http://unicorn.bogomips.org/).
+This app demonstrates how you can integrate [Ruby amqp gem](http://github.com/ruby-amqp/amqp) into a Ruby on Rails application that runs on [Passenger](http://www.modrails.com/).
 
 ## Getting Started ##
 
@@ -10,21 +10,19 @@ and then
 
     bundle install
 
-finally,
+after that, launch passenger standalone (or use nginx/apache module)
 
-    bundle exec unicorn_rails --port=3000 -c config/unicorn/development.rb
+    bundle exec passenger start -p 3000
+
+finally, visit http://localhost:3000/ with your browser and watch console output.
 
 
 ## What does it do? ##
 
-On application boot, Unicorn forks 1 worker and that worker starts EventMachine event loop in a separate
-thread and then  establishes connection to AMQP broker. The key here is to not start EventMachine reactor
-before the fork: due to a known EventMachine issue, this will result in a reactor in limbo (because forking
-has side effects on open file descriptors). Restarting it is possible but not without hacks and requires
-some knowledge about EventMachine internals.
+When application receives a request it is redirected to one of the free passenger workers. If there aren't any, passenger spawns one and gives control to it once it is loaded.
 
-Once connection is established, we publish a bunch of messages using default direct exchange.
-
+Key moment here is that you should start eventmachine reactor after the fork (if you use one of the smart* spawning methods),
+that's why `PhusionPassenger.on_event(:starting_worker_process)` is used. See `config/initializers/amqp.rb` for details.
 
 ## License ##
 
