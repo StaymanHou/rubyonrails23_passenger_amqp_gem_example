@@ -1,10 +1,18 @@
 GIT
+  remote: git://github.com/ruby-amqp/amq-client.git
+  revision: 998642fd95e78a8998af5101faaecc7fc326c185
+  specs:
+    amq-client (0.7.0.alpha35.pre)
+      amq-protocol (>= 0.7.0.alpha6)
+      eventmachine
+
+GIT
   remote: git://github.com/ruby-amqp/amqp.git
-  revision: cf87d18484a41f9219a67a57c42b33f9820f4090
+  revision: a417f7548b9e7bb4dfac3630fb336cf89da61011
   specs:
     amqp (0.8.0.rc13.pre)
-      amq-client (>= 0.7.0.alpha27)
-      amq-protocol (>= 0.7.0.alpha4)
+      amq-client (>= 0.7.0.alpha34)
+      amq-protocol (>= 0.7.0.alpha6)
       eventmachine
 
 GEM
@@ -20,10 +28,7 @@ GEM
     activeresource (2.3.10)
       activesupport (= 2.3.10)
     activesupport (2.3.10)
-    amq-client (0.7.0.alpha27)
-      amq-protocol (>= 0.7.0.alpha4)
-      eventmachine
-    amq-protocol (0.7.0.alpha4)
+    amq-protocol (0.7.0.alpha6)
     daemon_controller (0.2.6)
     eventmachine (0.12.10)
     fastthread (1.0.7)
@@ -47,7 +52,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  amqp (~> 0.8.0.rc12)!
+  amq-client!
+  amqp!
   passenger (= 3.0.7)
   pg
   rack (~> 1.1.0)
