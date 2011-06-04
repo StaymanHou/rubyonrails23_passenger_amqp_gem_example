@@ -12,7 +12,7 @@ and then
 
 finally,
 
-    unicorn_rails --port=3000 -c config/unicorn/development.rb
+    bundle exec unicorn_rails --port=3000 -c config/unicorn/development.rb
 
 
 ## What does it do? ##
