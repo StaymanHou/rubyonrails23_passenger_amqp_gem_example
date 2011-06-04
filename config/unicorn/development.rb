@@ -13,8 +13,11 @@ after_fork do |server, worker|
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
 
+  failure_handler = lambda {
+    puts "[ERROR] Could not connect to AMQP"
+  }
 
-  t = Thread.new { AMQP.start }
+  t = Thread.new { AMQP.start(:on_tcp_connection_failure => failure_handler) }
   sleep(1.0)
 
   EventMachine.next_tick do
